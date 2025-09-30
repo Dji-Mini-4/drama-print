@@ -11,14 +11,15 @@ class Dramaprint:
         # sets self.delay to argument `delay`
         self.delay = delay
 
-    def print(self, *args, sep=' ', end='\n'):
+    def print(self, *args, sep=' ', end='\n', soundPath=None):
         """
         Dramatically prints text to the console, like print() but slower & cooler.
         
         Parameters:
-            args  — multiple strings or values to print
-            sep   — separator between arguments (default: space)
-            end   — what to print at the end (default: newline)
+            args        — multiple strings or values to print
+            sep         — separator between arguments (default: space)
+            end         — what to print at the end (default: newline)
+            soundPath   — a string pointing to a path to a sound you would like to play after a character is typed (default: None)
         
         Also the delay is set on creating object or by setDelay
         """
@@ -28,6 +29,7 @@ class Dramaprint:
             sys.stdout.write(char)
             sys.stdout.flush() # flush immediately to terminal
             time.sleep(self.delay) # apply delay
+            if soundPath: # TODO: Not Completed
 
 # Example use:
 # Umcomment for testing:
