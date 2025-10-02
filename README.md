@@ -2,6 +2,7 @@
 ---
 Hello! This is a class that would provide a `print()` function (weird, huh) that would add extra delay after each character printed!
 To use this as the normal print, simply override it like this:
+
 ```python
 from dramaprint import Dramaprint # import the dramaprint object
 printObj = Dramaprint()
@@ -15,6 +16,14 @@ sound_path = "C:\Users\Yourname\Downloads\typingSound.wav" # Here is a typing so
 print('Hello Again Again!', soundPath=sound_path) # now it should play your sound after EACH CHAR
 print('Again...?', soundPath=sound_path, soundPerLine=True) # sound per LINE
 ```
+
+1. import `Dramaprint` class from the script containing it
+2. get a variable and assign it to `Dramaprint()` (You can set other things too in `__init__()` like delay)
+3. (Optional) Override the default `print()` with your obj (say printObj) like this: `print = printObj.print`
+4. You MUST set a delay, either in `__init__()` or with `printObj.setDelay()`. Missing this step would cause failiure.
+5. You can use it!
+6. If you have a typing-sound effect sound file (best in .wav, but .mp3 is fine), you can include the path and soundPerLine arg to make the print function play your sound!
+
 
 Play around with it!
 I found it quite useful in my projects  
