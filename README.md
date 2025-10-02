@@ -26,6 +26,7 @@ print('Again...?', soundPath=sound_path, soundPerLine=True) # sound per LINE
 
 
 Play around with it!
+I have provided a example typing sound effect for you to use
 I found it quite useful in my projects  
 Hope you'll have fun!
 
