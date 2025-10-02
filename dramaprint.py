@@ -1,10 +1,23 @@
 import sys, time, os
+
+# FOR DEVELOPERS:
+# This two lines can hide any extra information caused by the import of pygame
+# so apparently pygame is using an depracated API and it would print out a UserWarning
+# and pygame's startup banner can be a little annoying too
+# add the two lines below to hide any extra information caused by it
+# |  |  |
+# v  v  v
+
+# import warnings, os
+# warnings.filterwarnings("ignore", category=UserWarning, module="pygame.pkgdata") # hide pygame updata warning
+# os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1' # hide startup banner from pygame
+
 try:
-    from playsound import playsound
+    import pygame # import sound-playing module for now
     moduleExist = True
 except ImportError:
     moduleExist = False
-    
+
 class Dramaprint:
     """The class for dramatic printing"""
   
@@ -14,15 +27,17 @@ class Dramaprint:
     def setDelay(self, delay):
         # sets self.delay to argument `delay`
         self.delay = delay
-        
+
     def playSound(self, soundPath):
         try:
-            playsound(soundPath)
+            pygame.mixer.init()
+            pygame.mixer.Sound(soundPath).play()
         except Exception as e:
-            print('Runtime error occured when playing sound:')
-            print(f'\033[1m{type(e).__name__}: {e}\033[0m')
-            print('Please try again')
-            sys.exit()
+            if type(e).__name__ == "ImportError":
+                print('You ain\'t got the pygame module!!! WE NEED THOSE FOR SOUND PLAYING!!!')
+                print('Try again')
+                sys.exit()
+            print(f"\033[1mSound error:\033[0m {type(e).__name__}: {e}")    
             
     def print(self, *args, sep=' ', end='\n', soundPath=None, soundPerLine=False):
         """
@@ -43,14 +58,8 @@ class Dramaprint:
                 print('The file \033[1mdoesn\'t exist!\033[0m Try again :)')
                 sys.exit()
             elif not moduleExist:
-                print('You wanted to play sound, but the playsound module \033[1mdoesn\'t exist!\033[0m Install it now?')
-                installNow = input('> ').upper()
-                if installNow == "N":
-                    import subprocess
-                    installAttempt = subprocess.run(['pip', 'install', '--user', 'playsound'], capture_output=True)
-                    if installAttempt.stderr:
-                        print(f'STDERR: {installAttempt.stderr}')
-                    sys.exit()
+                print('You wanted to play sound, but the pygame module \033[1misn\'t installed!\033[0m Install it and try again')
+                sys.exit()
             else:
                 sound = True
 
