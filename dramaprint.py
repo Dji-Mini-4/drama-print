@@ -43,8 +43,14 @@ class Dramaprint:
                 print('The file \033[1mdoesn\'t exist!\033[0m Try again :)')
                 sys.exit()
             elif not moduleExist:
-                print('You wanted to play sound, but the playsound module \033[1mdoesn\'t exist!\033[0m Try again :)')
-                sys.exit()
+                print('You wanted to play sound, but the playsound module \033[1mdoesn\'t exist!\033[0m Install it now?')
+                installNow = input('> ').upper()
+                if installNow == "N":
+                    import subprocess
+                    installAttempt = subprocess.run(['pip', 'install', '--user', 'playsound'], capture_output=True)
+                    if installAttempt.stderr:
+                        print(f'STDERR: {installAttempt.stderr}')
+                    sys.exit()
             else:
                 sound = True
 
